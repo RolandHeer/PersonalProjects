@@ -14,17 +14,17 @@ namespace Rollantor {
 
     ///   IMAGES   \\\
     let bgImg: HTMLImageElement = new Image();
-    //bgImg.src = "../img/Grund.jpg";
-    bgImg.src = "Rollantor/img/Grund.jpg";
+    bgImg.src = "../img/Grund.jpg";
+    //bgImg.src = "Rollantor/img/Grund.jpg";
     let signImg: HTMLImageElement = new Image();
-    //signImg.src = "../img/Schilder.jpg";
-    signImg.src = "Rollantor/img/Schilder.jpg";
+    signImg.src = "../img/Schilder.jpg";
+    //signImg.src = "Rollantor/img/Schilder.jpg";
     let shrubsImg: HTMLImageElement = new Image();
-    //shrubsImg.src = "../img/Pflanzen.jpg";
-    shrubsImg.src = "Rollantor/img/Pflanzen.jpg";
+    shrubsImg.src = "../img/Pflanzen.jpg";
+    //shrubsImg.src = "Rollantor/img/Pflanzen.jpg";
     let dementorImg: HTMLImageElement = new Image();
-    //dementorImg.src = "../img/Alter_Mann.png"
-    dementorImg.src = "Rollantor/img/Alter_Mann.png"
+    dementorImg.src = "../img/Alter_Mann.png"
+    //dementorImg.src = "Rollantor/img/Alter_Mann.png"
 
     function setup(): void {
         defineValues();
