@@ -11,13 +11,17 @@ var Rollantor;
     let downIsPressed = false;
     ///   IMAGES   \\\
     let bgImg = new Image();
-    bgImg.src = "../img/Grund.jpg";
+    //bgImg.src = "../img/Grund.jpg";
+    bgImg.src = "Rollantor/img/Grund.jpg";
     let signImg = new Image();
-    signImg.src = "../img/Schilder.jpg";
+    //signImg.src = "../img/Schilder.jpg";
+    signImg.src = "Rollantor/img/Schilder.jpg";
     let shrubsImg = new Image();
-    shrubsImg.src = "../img/Pflanzen.jpg";
+    //shrubsImg.src = "../img/Pflanzen.jpg";
+    shrubsImg.src = "Rollantor/img/Pflanzen.jpg";
     let dementorImg = new Image();
-    dementorImg.src = "../img/Alter_Mann.png";
+    //dementorImg.src = "../img/Alter_Mann.png"
+    dementorImg.src = "Rollantor/img/Alter_Mann.png";
     function setup() {
         defineValues();
         crc2.scale(crc2.canvas.width / 3508, crc2.canvas.height / 2481);
