@@ -123,7 +123,7 @@ var Rollantor;
             let backForce = this.getTurnForce(this.backRadius, this.backTurn, this.backTurnDest, this.backMaxRotDiff);
             /// FrontTurn \\\
             let frontForce = this.getTurnForce(this.frontRadius, this.frontTurn, this.frontTurnDest, this.frontMaxRotDiff);
-            this.rollantorForce = mainForce + backForce + frontForce;
+            this.rollantorForce = (mainForce + backForce + frontForce) * 0.8;
         }
         getTurnForce(_influence, _turnPos, _turnDest, _maxRotDiff) {
             let strength = Math.max(0, _influence - Rollantor.Vector.getDifference(this.pos, _turnPos).length) / 500;

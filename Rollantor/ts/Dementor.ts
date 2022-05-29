@@ -136,7 +136,7 @@ namespace Rollantor {
             /// FrontTurn \\\
             let frontForce: number = this.getTurnForce(this.frontRadius, this.frontTurn, this.frontTurnDest, this.frontMaxRotDiff);
 
-            this.rollantorForce = mainForce + backForce + frontForce;
+            this.rollantorForce = (mainForce + backForce + frontForce)*0.8;
         }
 
         private getTurnForce(_influence: number, _turnPos: Vector, _turnDest: Vector, _maxRotDiff: number): number {
