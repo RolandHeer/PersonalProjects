@@ -5,26 +5,32 @@ namespace Rollantor {
     let canvas: HTMLCanvasElement;
     let crc2: CanvasRenderingContext2D;
     let fps: number = 60;
+    let internalWidth: number = 3508;
+    let internalHeight: number = 2481;
 
     let dementor: Dementor;
     let leftIsPressed: boolean = false;
     let rightIsPressed: boolean = false;
     let upIsPressed: boolean = false;
     let downIsPressed: boolean = false;
+    let qIsPressed: boolean = false;
+    let eIsPressed: boolean = false;
+
+    let rollantorRotAccel: number = 0.1;
 
     ///   IMAGES   \\\
     let bgImg: HTMLImageElement = new Image();
     bgImg.src = "./img/Grund.jpg";
     let signImg: HTMLImageElement = new Image();
-    signImg.src = "./img/Schilder.jpg";
+    signImg.src = "./img/Schilder.png";
     let shrubsImg: HTMLImageElement = new Image();
-    shrubsImg.src = "./img/Pflanzen.jpg";
+    shrubsImg.src = "./img/Pflanzen.png";
     let dementorImg: HTMLImageElement = new Image();
     dementorImg.src = "./img/Alter_Mann.png"
 
     function setup(): void {
         defineValues();
-        crc2.scale(crc2.canvas.width / 3508, crc2.canvas.height / 2481);
+        crc2.scale(crc2.canvas.width / internalWidth, crc2.canvas.height / internalHeight);
         resize();
         window.setInterval(update, (1000 / fps));
         window.addEventListener("keydown", keyDownHandler);
@@ -33,21 +39,24 @@ namespace Rollantor {
     }
 
     function update(): void {
-        dementor.move(leftIsPressed, rightIsPressed, upIsPressed, downIsPressed);
+        renderBG();
+        dementor.update(leftIsPressed, rightIsPressed, upIsPressed, downIsPressed);
         renderWorld();
     }
 
+    function renderBG(): void{
+        crc2.drawImage(bgImg, 0, 0);
+    }
+
     function renderWorld(): void {
-        crc2.fillStyle = "#696969";
-        crc2.drawImage(bgImg,0,0);
-        if(dementor.getPos().y>900){
-            //crc2.drawImage(signImg,0,0);
+        if (dementor.getPos().y > 900) {
+            crc2.drawImage(signImg, 0, 0);
             dementor.draw();
-        }else{
+        } else {
             dementor.draw();
-            //crc2.drawImage(signImg,0,0);
+            crc2.drawImage(signImg, 0, 0);
         }
-        //crc2.drawImage(shrubsImg,0,0);        
+        crc2.drawImage(shrubsImg, 0, 0);
     }
 
     function keyDownHandler(_key: any): void {
@@ -67,6 +76,12 @@ namespace Rollantor {
             case "ArrowDown":
             case "KeyS":
                 downIsPressed = true;
+                break;
+            case "KeyQ":
+                qIsPressed = true;
+                break;
+            case "KeyE":
+                eIsPressed = true;
                 break;
             default:
                 console.log("hier wurde etwas gedrückt, das es nicht gibt.");
@@ -92,6 +107,12 @@ namespace Rollantor {
             case "KeyS":
                 downIsPressed = false;
                 break;
+            case "KeyQ":
+                qIsPressed = false;
+                break;
+            case "KeyE":
+                eIsPressed = false;
+                break;
             default:
                 console.log("hier wurde etwas losgelassen, das es nicht gibt.");
 
@@ -106,7 +127,7 @@ namespace Rollantor {
 
     function resize() {
         canvas.height = window.innerHeight;
-        canvas.width = window.innerHeight * (3508 / 2481);
-        crc2.scale(crc2.canvas.width / 3508, crc2.canvas.height / 2481);
+        canvas.width = window.innerHeight * (internalWidth / internalHeight);
+        crc2.scale(crc2.canvas.width / internalWidth, crc2.canvas.height / internalHeight);
     }
 }

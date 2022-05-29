@@ -36,6 +36,17 @@ var Rollantor;
             tempVector = this.getScaled(tempVector, _length);
             return tempVector;
         }
+        static getRotVector(_length, _rot) {
+            return this.getuberVector(_length, new Vector(Math.sin(_rot * Math.PI / 180), -Math.cos(_rot * Math.PI / 180)));
+        }
+        static getRotOfVector(_vector) {
+            if (_vector.x < 0) {
+                return -(90 - (Math.atan(-_vector.y / -_vector.x) * (180 / Math.PI)));
+            }
+            else {
+                return (Math.atan(-_vector.y / -_vector.x) * (180 / Math.PI)) + 90;
+            }
+        }
         set(_x, _y) {
             this.x = _x;
             this.y = _y;
