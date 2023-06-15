@@ -2208,6 +2208,25 @@ declare namespace FudgeCore {
      * Attaches a {@link Material} to the node
      * @authors Jirka Dell'Oro-Friedl, HFU, 2019 - 2021
      */
+    class ComponentPostFX extends Component {
+        static readonly iSubclass: number;
+        mist: boolean;
+        clrMist: Color;
+        nearPlane: number;
+        farPlane: number;
+        ao: boolean;
+        clrAO: Color;
+        bloom: boolean;
+        constructor(_mist?: boolean, _clrMist?: Color, _nearPlane?: number, _farPlane?: number, _ao?: boolean, _clrAO?: Color, _bloom?: boolean);
+        serialize(): Serialization;
+        deserialize(_serialization: Serialization): Promise<Serializable>;
+    }
+}
+declare namespace FudgeCore {
+    /**
+     * Attaches a {@link Material} to the node
+     * @authors Jirka Dell'Oro-Friedl, HFU, 2019 - 2021
+     */
     class ComponentMaterial extends Component {
         static readonly iSubclass: number;
         clrPrimary: Color;

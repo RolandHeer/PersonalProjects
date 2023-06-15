@@ -13,17 +13,17 @@ namespace Script {
   let point2: ƒ.Node;
   let point3: ƒ.Node;
 
-  let camSpeed: number = 0.5;
+  let pitch: number = 15;
+  let pitchSpeed: number = 1.5;
+  let yaw: number = 180;
+  let yawSpeed: number = 0.5;
   let bounceSpeed: number = 0.01;
   let x1: number = 0;
   let x2: number = 1.05;
   let x3: number = 2.1;
 
-  let chair1: ƒ.Node;
-  let chairMetal1: ƒ.Node;
-
-  let chair2: ƒ.Node;
-  let chairMetal2: ƒ.Node;
+  let phong: ƒ.Node;
+  let gouraud: ƒ.Node;
 
   let toggle: boolean = false;
 
@@ -31,22 +31,18 @@ namespace Script {
   document.addEventListener("interactiveViewportStarted", <EventListener><unknown>start);
 
   function init(_event: Event): void {
-    window.addEventListener("keydown", startViewport);
-    window.addEventListener("mousedown", startViewport);
-    window.addEventListener("touchend", startViewport);
+    startViewport();
   }
 
   function startViewport(): void {
-    window.removeEventListener("keydown", startViewport);
-    window.removeEventListener("mousedown", startViewport);
-    window.removeEventListener("touchend", startViewport);
-
     window.addEventListener("keydown", hndKeydown);
     canvas = document.querySelector("canvas");
-    startInteractiveViewport();
+    crc2 = canvas.getContext("2d");
+    document.getElementById("info").style.display = "none";
+    setupViewport();
   }
 
-  async function startInteractiveViewport(): Promise<void> {
+  async function setupViewport(): Promise<void> {
     // load resources referenced in the link-tag
     await FudgeCore.Project.loadResourcesFromHTML();
     FudgeCore.Debug.log("Project:", FudgeCore.Project.resources);
@@ -75,11 +71,8 @@ namespace Script {
     point2 = graph.getChildrenByName("light")[0].getChildrenByName("points")[0].getChildren()[1];
     point3 = graph.getChildrenByName("light")[0].getChildrenByName("points")[0].getChildren()[2];
 
-    chair1 = graph.getChildrenByName("phong")[0].getChildren()[0];
-    chairMetal1 = graph.getChildrenByName("phong")[0].getChildren()[1];
-
-    chair2 = graph.getChildrenByName("gouraud")[0].getChildren()[0];
-    chairMetal2 = graph.getChildrenByName("gouraud")[0].getChildren()[1];
+    phong = graph.getChildrenByName("phong")[0];
+    gouraud = graph.getChildrenByName("gouraud")[0];
 
     console.log(point1);
 
@@ -89,12 +82,27 @@ namespace Script {
 
   function update(_event: Event): void {
     viewport.draw();
-    camNode.mtxLocal.rotateY(camSpeed);
+    yaw += yawSpeed;
+    camNode.mtxLocal.rotation = new ƒ.Vector3(pitch, yaw, 0);
 
-    chair1.getComponent(ƒ.ComponentMesh).activate(!toggle);
-    chairMetal1.getComponent(ƒ.ComponentMesh).activate(!toggle);
-    chair2.getComponent(ƒ.ComponentMesh).activate(toggle);
-    chairMetal2.getComponent(ƒ.ComponentMesh).activate(toggle);
+    for (let i: number = 0; i < phong.getChildren().length; i++) {
+      phong.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(!toggle);
+    }
+    for (let i: number = 0; i < gouraud.getChildren().length; i++) {
+      gouraud.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(toggle);
+    }
+
+    camNode.getChildren()[0].getComponent(ƒ.ComponentPostFX).activate(!toggle);
+
+    crc2.fillStyle = "#fff";
+    crc2.font = canvas.height * 0.012 + "px sans-serif";
+    crc2.fillText("press T to toggle between new and old shading, press the Up or Down key to change the cameras pitch", canvas.height * 0.05, canvas.height * 0.07);
+    crc2.font = canvas.height * 0.02 + "px sans-serif";
+    if (toggle) {
+      crc2.fillText("OLD: Gouraud shading", canvas.height * 0.05, canvas.height * 0.05);
+    } else {
+      crc2.fillText("NEW: Phong shading + Normal Maps", canvas.height * 0.05, canvas.height * 0.05);
+    }
 
     if (x1 < Math.PI) {
       x1 += bounceSpeed;
@@ -117,7 +125,14 @@ namespace Script {
     point3.mtxLocal.translation = new ƒ.Vector3(0, Math.sin(x3) / 2, 0.15);
   }
 
-  function hndKeydown(_event: any){
-    if(_event.code == "KeyT") toggle = !toggle;
+  function hndKeydown(_event: any) {
+    switch (_event.code) {
+      case "KeyT": toggle = !toggle;
+        break;
+      case "ArrowUp": pitch = Math.max(Math.min(pitch + pitchSpeed, 90), -8);
+        break;
+      case "ArrowDown": pitch = Math.max(Math.min(pitch - pitchSpeed, 90), -8);
+        break;
+    }
   }
 }

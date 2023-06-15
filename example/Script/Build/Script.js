@@ -50,32 +50,30 @@ var Script;
     let point1;
     let point2;
     let point3;
-    let camSpeed = 0.5;
+    let pitch = 15;
+    let pitchSpeed = 1.5;
+    let yaw = 180;
+    let yawSpeed = 0.5;
     let bounceSpeed = 0.01;
     let x1 = 0;
     let x2 = 1.05;
     let x3 = 2.1;
-    let chair1;
-    let chairMetal1;
-    let chair2;
-    let chairMetal2;
+    let phong;
+    let gouraud;
     let toggle = false;
     window.addEventListener("load", init);
     document.addEventListener("interactiveViewportStarted", start);
     function init(_event) {
-        window.addEventListener("keydown", startViewport);
-        window.addEventListener("mousedown", startViewport);
-        window.addEventListener("touchend", startViewport);
+        startViewport();
     }
     function startViewport() {
-        window.removeEventListener("keydown", startViewport);
-        window.removeEventListener("mousedown", startViewport);
-        window.removeEventListener("touchend", startViewport);
         window.addEventListener("keydown", hndKeydown);
         canvas = document.querySelector("canvas");
-        startInteractiveViewport();
+        crc2 = canvas.getContext("2d");
+        document.getElementById("info").style.display = "none";
+        setupViewport();
     }
-    async function startInteractiveViewport() {
+    async function setupViewport() {
         // load resources referenced in the link-tag
         await FudgeCore.Project.loadResourcesFromHTML();
         FudgeCore.Debug.log("Project:", FudgeCore.Project.resources);
@@ -100,21 +98,33 @@ var Script;
         point1 = graph.getChildrenByName("light")[0].getChildrenByName("points")[0].getChildren()[0];
         point2 = graph.getChildrenByName("light")[0].getChildrenByName("points")[0].getChildren()[1];
         point3 = graph.getChildrenByName("light")[0].getChildrenByName("points")[0].getChildren()[2];
-        chair1 = graph.getChildrenByName("phong")[0].getChildren()[0];
-        chairMetal1 = graph.getChildrenByName("phong")[0].getChildren()[1];
-        chair2 = graph.getChildrenByName("gouraud")[0].getChildren()[0];
-        chairMetal2 = graph.getChildrenByName("gouraud")[0].getChildren()[1];
+        phong = graph.getChildrenByName("phong")[0];
+        gouraud = graph.getChildrenByName("gouraud")[0];
         console.log(point1);
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
     }
     function update(_event) {
         viewport.draw();
-        camNode.mtxLocal.rotateY(camSpeed);
-        chair1.getComponent(ƒ.ComponentMesh).activate(!toggle);
-        chairMetal1.getComponent(ƒ.ComponentMesh).activate(!toggle);
-        chair2.getComponent(ƒ.ComponentMesh).activate(toggle);
-        chairMetal2.getComponent(ƒ.ComponentMesh).activate(toggle);
+        yaw += yawSpeed;
+        camNode.mtxLocal.rotation = new ƒ.Vector3(pitch, yaw, 0);
+        for (let i = 0; i < phong.getChildren().length; i++) {
+            phong.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(!toggle);
+        }
+        for (let i = 0; i < gouraud.getChildren().length; i++) {
+            gouraud.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(toggle);
+        }
+        camNode.getChildren()[0].getComponent(ƒ.ComponentPostFX).activate(!toggle);
+        crc2.fillStyle = "#fff";
+        crc2.font = canvas.height * 0.012 + "px sans-serif";
+        crc2.fillText("press T to toggle between new and old shading, press the Up or Down key to change the cameras pitch", canvas.height * 0.05, canvas.height * 0.07);
+        crc2.font = canvas.height * 0.02 + "px sans-serif";
+        if (toggle) {
+            crc2.fillText("OLD: Gouraud shading", canvas.height * 0.05, canvas.height * 0.05);
+        }
+        else {
+            crc2.fillText("NEW: Phong shading + Normal Maps", canvas.height * 0.05, canvas.height * 0.05);
+        }
         if (x1 < Math.PI) {
             x1 += bounceSpeed;
         }
@@ -138,8 +148,17 @@ var Script;
         point3.mtxLocal.translation = new ƒ.Vector3(0, Math.sin(x3) / 2, 0.15);
     }
     function hndKeydown(_event) {
-        if (_event.code == "KeyT")
-            toggle = !toggle;
+        switch (_event.code) {
+            case "KeyT":
+                toggle = !toggle;
+                break;
+            case "ArrowUp":
+                pitch = Math.max(Math.min(pitch + pitchSpeed, 90), -8);
+                break;
+            case "ArrowDown":
+                pitch = Math.max(Math.min(pitch - pitchSpeed, 90), -8);
+                break;
+        }
     }
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map
