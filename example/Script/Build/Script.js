@@ -60,7 +60,8 @@ var Script;
     let x3 = 2.1;
     let phong;
     let gouraud;
-    let toggle = false;
+    let toggleShading = false;
+    let toggleMovement = true;
     window.addEventListener("load", init);
     document.addEventListener("interactiveViewportStarted", start);
     function init(_event) {
@@ -106,59 +107,73 @@ var Script;
     }
     function update(_event) {
         viewport.draw();
-        yaw += yawSpeed;
+        if (toggleMovement)
+            yaw += yawSpeed;
         camNode.mtxLocal.rotation = new ƒ.Vector3(pitch, yaw, 0);
         for (let i = 0; i < phong.getChildren().length; i++) {
-            phong.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(!toggle);
+            phong.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(!toggleShading);
         }
         for (let i = 0; i < gouraud.getChildren().length; i++) {
-            gouraud.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(toggle);
+            gouraud.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(toggleShading);
         }
-        camNode.getChildren()[0].getComponent(ƒ.ComponentPostFX).activate(!toggle);
+        camNode.getChildren()[0].getComponent(ƒ.ComponentPostFX).activate(!toggleShading);
         crc2.fillStyle = "#fff";
         crc2.font = canvas.height * 0.012 + "px sans-serif";
         crc2.fillText("press T to toggle between new and old shading, press the Up or Down key to change the cameras pitch", canvas.height * 0.05, canvas.height * 0.07);
         let fps = Math.round(1000 / ƒ.Loop.timeFrameGame);
         crc2.fillText("FPS: " + fps, canvas.width * 0.95, canvas.height * 0.05);
         crc2.font = canvas.height * 0.02 + "px sans-serif";
-        if (toggle) {
+        if (toggleShading) {
             crc2.fillText("OLD: Gouraud shading", canvas.height * 0.05, canvas.height * 0.05);
         }
         else {
             crc2.fillText("NEW: Phong shading + Normal Maps", canvas.height * 0.05, canvas.height * 0.05);
         }
-        if (x1 < Math.PI) {
-            x1 += bounceSpeed;
+        if (toggleMovement) {
+            if (x1 < Math.PI) {
+                x1 += bounceSpeed;
+            }
+            else {
+                x1 = 0;
+            }
+            if (x2 < Math.PI) {
+                x2 += bounceSpeed;
+            }
+            else {
+                x2 = 0;
+            }
+            if (x3 < Math.PI) {
+                x3 += bounceSpeed;
+            }
+            else {
+                x3 = 0;
+            }
+            point1.mtxLocal.translation = new ƒ.Vector3(0.15, Math.sin(x1) / 2, 0);
+            point2.mtxLocal.translation = new ƒ.Vector3(-0.15, Math.sin(x2) / 2, 0);
+            point3.mtxLocal.translation = new ƒ.Vector3(0, Math.sin(x3) / 2, 0.15);
         }
-        else {
-            x1 = 0;
-        }
-        if (x2 < Math.PI) {
-            x2 += bounceSpeed;
-        }
-        else {
-            x2 = 0;
-        }
-        if (x3 < Math.PI) {
-            x3 += bounceSpeed;
-        }
-        else {
-            x3 = 0;
-        }
-        point1.mtxLocal.translation = new ƒ.Vector3(0.15, Math.sin(x1) / 2, 0);
-        point2.mtxLocal.translation = new ƒ.Vector3(-0.15, Math.sin(x2) / 2, 0);
-        point3.mtxLocal.translation = new ƒ.Vector3(0, Math.sin(x3) / 2, 0.15);
     }
     function hndKeydown(_event) {
         switch (_event.code) {
             case "KeyT":
-                toggle = !toggle;
+                toggleShading = !toggleShading;
                 break;
             case "ArrowUp":
                 pitch = Math.max(Math.min(pitch + pitchSpeed, 90), -8);
                 break;
             case "ArrowDown":
                 pitch = Math.max(Math.min(pitch - pitchSpeed, 90), -8);
+                break;
+            case "ArrowLeft":
+                if (!toggleMovement)
+                    yaw -= pitchSpeed;
+                break;
+            case "ArrowRight":
+                if (!toggleMovement)
+                    yaw += pitchSpeed;
+                break;
+            case "Space":
+                toggleMovement = !toggleMovement;
                 break;
         }
     }
