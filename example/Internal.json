@@ -516,7 +516,7 @@
                   "ƒ.ComponentTransform": {
                     "local": {
                       "translation": "[0, 0.6999999284744263, 0]",
-                      "rotation": "[17, 180, 0]",
+                      "rotation": "[3, 270, 0]",
                       "scaling": "[1, 1, 1]"
                     },
                     "Component": {
@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.7476635514018692,
+                          "aspect": 1.5879292403746097,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -571,16 +571,14 @@
                         }
                       }
                     ],
-                    "ComponentPostFX": [
+                    "ComponentBloom": [
                       {
-                        "ƒ.ComponentPostFX": {
-                          "mist": true,
-                          "clrMist": "[0, 0, 0, 1]",
-                          "nearPlane": 3.6000000000000005,
-                          "farPlane": 10.199999999999996,
-                          "ao": false,
-                          "clrAO": "[0, 0, 0, 1]",
-                          "bloom": false
+                        "ƒ.ComponentBloom": {
+                          "threshold": 0.7999999999999999,
+                          "intensity": 2,
+                          "Component": {
+                            "active": true
+                          }
                         }
                       }
                     ]
