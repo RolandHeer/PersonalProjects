@@ -516,7 +516,7 @@
                   "ƒ.ComponentTransform": {
                     "local": {
                       "translation": "[0, 0.6999999284744263, 0]",
-                      "rotation": "[3, 270, 0]",
+                      "rotation": "[15, 270, 0]",
                       "scaling": "[1, 1, 1]"
                     },
                     "Component": {
@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.5879292403746097,
+                          "aspect": 1.7410526315789474,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -574,8 +574,20 @@
                     "ComponentBloom": [
                       {
                         "ƒ.ComponentBloom": {
-                          "threshold": 0.7999999999999999,
+                          "threshold": 0.82,
                           "intensity": 2,
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMist": [
+                      {
+                        "ƒ.ComponentMist": {
+                          "clrMist": "[0, 0, 0, 1]",
+                          "nearPlane": 2,
+                          "farPlane": 19.99999999999997,
                           "Component": {
                             "active": true
                           }
