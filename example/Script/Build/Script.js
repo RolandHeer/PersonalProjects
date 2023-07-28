@@ -61,6 +61,9 @@ var Script;
     let phong;
     let gouraud;
     let toggleShading = false;
+    let toggleMist = false;
+    let toggleBloom = false;
+    let toggleAo = false;
     let toggleMovement = true;
     window.addEventListener("load", init);
     document.addEventListener("interactiveViewportStarted", start);
@@ -116,7 +119,9 @@ var Script;
         for (let i = 0; i < gouraud.getChildren().length; i++) {
             gouraud.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(toggleShading);
         }
-        camNode.getChildren()[0].getComponent(ƒ.ComponentPostFX).activate(!toggleShading);
+        camNode.getChildren()[0].getComponent(ƒ.ComponentMist).activate(!toggleMist);
+        camNode.getChildren()[0].getComponent(ƒ.ComponentBloom).activate(!toggleBloom);
+        //bbcamNode.getChildren()[0].getComponent(ƒ.ComponentAmbientOcclusion).activate(!toggleAo);
         crc2.fillStyle = "#fff";
         crc2.font = canvas.height * 0.012 + "px sans-serif";
         crc2.fillText("press T to toggle between new and old shading, press the Up or Down key to change the cameras pitch", canvas.height * 0.05, canvas.height * 0.07);
@@ -155,8 +160,17 @@ var Script;
     }
     function hndKeydown(_event) {
         switch (_event.code) {
-            case "KeyT":
+            case "KeyS":
                 toggleShading = !toggleShading;
+                break;
+            case "KeyM":
+                toggleMist = !toggleMist;
+                break;
+            case "KeyB":
+                toggleBloom = !toggleBloom;
+                break;
+            case "KeyA":
+                toggleAo = !toggleAo;
                 break;
             case "ArrowUp":
                 pitch = Math.max(Math.min(pitch + pitchSpeed, 90), -8);

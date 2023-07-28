@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.7410526315789474,
+                          "aspect": 1.7965367965367964,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -585,7 +585,7 @@
                     "ComponentMist": [
                       {
                         "ƒ.ComponentMist": {
-                          "clrMist": "[0, 0, 0, 1]",
+                          "clrMist": "[0, 0.06666666666666667, 0.09803921568627451, 1]",
                           "nearPlane": 2,
                           "farPlane": 19.99999999999997,
                           "Component": {

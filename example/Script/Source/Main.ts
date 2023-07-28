@@ -26,6 +26,9 @@ namespace Script {
   let gouraud: ƒ.Node;
 
   let toggleShading: boolean = false;
+  let toggleMist: boolean = false;
+  let toggleBloom: boolean = false;
+  let toggleAo: boolean = false;
   let toggleMovement: boolean = true;
 
   window.addEventListener("load", init);
@@ -93,7 +96,9 @@ namespace Script {
       gouraud.getChildren()[i].getComponent(ƒ.ComponentMesh).activate(toggleShading);
     }
 
-    camNode.getChildren()[0].getComponent(ƒ.ComponentPostFX).activate(!toggleShading);
+    camNode.getChildren()[0].getComponent(ƒ.ComponentMist).activate(!toggleMist);
+    camNode.getChildren()[0].getComponent(ƒ.ComponentBloom).activate(!toggleBloom);
+    //bbcamNode.getChildren()[0].getComponent(ƒ.ComponentAmbientOcclusion).activate(!toggleAo);
 
     crc2.fillStyle = "#fff";
     crc2.font = canvas.height * 0.012 + "px sans-serif";
@@ -132,7 +137,13 @@ namespace Script {
 
   function hndKeydown(_event: any) {
     switch (_event.code) {
-      case "KeyT": toggleShading = !toggleShading;
+      case "KeyS": toggleShading = !toggleShading;
+        break;
+        case "KeyM": toggleMist = !toggleMist;
+        break;
+        case "KeyB": toggleBloom = !toggleBloom;
+        break;
+        case "KeyA": toggleAo = !toggleAo;
         break;
       case "ArrowUp": pitch = Math.max(Math.min(pitch + pitchSpeed, 90), -8);
         break;
