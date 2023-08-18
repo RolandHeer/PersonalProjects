@@ -318,7 +318,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[0.8666666666666667, 0.9921568627450981, 0.9921568627450981, 1]",
+                                "clrPrimary": "[0.8745098039215686, 1, 1, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -393,7 +393,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[1, 0.9921568627450981, 0.8980392156862745, 1]",
+                                "clrPrimary": "[1, 0.9921568627450981, 0.8666666666666667, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.6878698224852071,
+                          "aspect": 1.6820276497695852,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -575,7 +575,7 @@
                       {
                         "ƒ.ComponentBloom": {
                           "threshold": 0.9430000000000001,
-                          "intensity": 0.9,
+                          "intensity": 1,
                           "Component": {
                             "active": true
                           }
