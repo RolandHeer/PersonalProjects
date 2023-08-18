@@ -277,7 +277,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "point",
+                        "name": "c",
                         "active": true,
                         "components": {
                           "ComponentLight": [
@@ -318,7 +318,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[0.8784313725490196, 1, 1, 1]",
+                                "clrPrimary": "[0.8666666666666667, 0.9921568627450981, 0.9921568627450981, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -352,7 +352,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "point",
+                        "name": "y",
                         "active": true,
                         "components": {
                           "ComponentLight": [
@@ -393,7 +393,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[1, 0.9803921568627451, 0.7215686274509804, 1]",
+                                "clrPrimary": "[1, 0.9921568627450981, 0.8980392156862745, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -427,7 +427,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "point",
+                        "name": "m",
                         "active": true,
                         "components": {
                           "ComponentLight": [
@@ -516,7 +516,7 @@
                   "ƒ.ComponentTransform": {
                     "local": {
                       "translation": "[0, 0.6999999284744263, 0]",
-                      "rotation": "[15, 232, 0]",
+                      "rotation": "[15, -626.60009765625, 0]",
                       "scaling": "[1, 1, 1]"
                     },
                     "Component": {
@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.7424242424242424,
+                          "aspect": 1.6878698224852071,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -574,7 +574,7 @@
                     "ComponentBloom": [
                       {
                         "ƒ.ComponentBloom": {
-                          "threshold": 0.924,
+                          "threshold": 0.9430000000000001,
                           "intensity": 0.9,
                           "Component": {
                             "active": true
