@@ -468,7 +468,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[1, 0.8784313725490196, 1, 1]",
+                                "clrPrimary": "[1, 0.9215686274509803, 1, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.6820276497695852,
+                          "aspect": 1.5952380952380953,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -574,8 +574,9 @@
                     "ComponentBloom": [
                       {
                         "ƒ.ComponentBloom": {
-                          "threshold": 0.9430000000000001,
-                          "intensity": 1,
+                          "threshold": 0.9129999999999997,
+                          "intensity": 1.1,
+                          "lvl": 12,
                           "Component": {
                             "active": true
                           }
@@ -589,7 +590,17 @@
                           "nearPlane": 2,
                           "farPlane": 19.99999999999997,
                           "Component": {
-                            "active": true
+                            "active": false
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentAmbientOcclusion": [
+                      {
+                        "ƒ.ComponentAmbientOcclusion": {
+                          "clrAO": "[0, 0, 0, 1]",
+                          "Component": {
+                            "active": false
                           }
                         }
                       }
