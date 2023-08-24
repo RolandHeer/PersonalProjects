@@ -98,7 +98,7 @@ namespace Script {
 
     camNode.getChildren()[0].getComponent(ƒ.ComponentMist).activate(!toggleMist);
     camNode.getChildren()[0].getComponent(ƒ.ComponentBloom).activate(!toggleBloom);
-    //bbcamNode.getChildren()[0].getComponent(ƒ.ComponentAmbientOcclusion).activate(!toggleAo);
+    camNode.getChildren()[0].getComponent(ƒ.ComponentAmbientOcclusion).activate(!toggleAo);
 
     crc2.fillStyle = "#fff";
     crc2.font = canvas.height * 0.012 + "px sans-serif";
