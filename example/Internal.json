@@ -559,7 +559,7 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1.5952380952380953,
+                          "aspect": 1.5616161616161617,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -574,9 +574,8 @@
                     "ComponentBloom": [
                       {
                         "ƒ.ComponentBloom": {
-                          "threshold": 0.9129999999999997,
-                          "intensity": 1.1,
-                          "lvl": 12,
+                          "threshold": 0.9669999999999997,
+                          "intensity": 0.8,
                           "Component": {
                             "active": true
                           }
@@ -590,7 +589,7 @@
                           "nearPlane": 2,
                           "farPlane": 19.99999999999997,
                           "Component": {
-                            "active": false
+                            "active": true
                           }
                         }
                       }
@@ -598,9 +597,12 @@
                     "ComponentAmbientOcclusion": [
                       {
                         "ƒ.ComponentAmbientOcclusion": {
-                          "clrAO": "[0, 0, 0, 1]",
+                          "clrAO": "[0, 0.06666666666666667, 0.09803921568627451, 1]",
+                          "samples": 64,
+                          "radius": 1.4,
+                          "bias": 8,
                           "Component": {
-                            "active": false
+                            "active": true
                           }
                         }
                       }

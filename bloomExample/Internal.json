@@ -80,7 +80,7 @@
               "projection": "central",
               "fieldOfView": 45,
               "direction": "diagonal",
-              "aspect": 1.6270491803278688,
+              "aspect": 1.7024922118380061,
               "pivot": {
                 "translation": "[0, 2.999997854232788, 0]",
                 "rotation": "[90, 0, 0]",
@@ -95,11 +95,11 @@
         "ComponentBloom": [
           {
             "ƒ.ComponentBloom": {
-              "threshold": 0.8299999999999998,
+              "threshold": 0.8099999999999998,
               "intensity": 0.8999999999999984,
-              "desaturateHighlights": 0.5,
+              "desaturateHighlights": 0.44000000000000006,
               "Component": {
-                "active": true
+                "active": false
               }
             }
           }
